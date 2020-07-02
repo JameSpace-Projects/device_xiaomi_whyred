@@ -13,8 +13,6 @@ import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreference;
 import android.content.Context;
-import android.content.SharedPreferences;
-import androidx.preference.SwitchPreference;
 import android.util.Log;
 
 import com.xiaomi.parts.kcal.KCalSettingsActivity;
@@ -49,8 +47,6 @@ public class DeviceSettings extends PreferenceFragment implements
     public static final String PREF_VIBRATION_STRENGTH = "vibration_strength";
     public static final String VIBRATION_STRENGTH_PATH = "/sys/devices/virtual/timed_output/vibrator/vtg_level";
 
-    public static final String PREF_KEY_FPS_INFO = "fps_info";
-
     // value of vtg_min and vtg_max
     public static final int MIN_VIBRATION = 116;
     public static final int MAX_VIBRATION = 3596;
@@ -78,7 +74,6 @@ public class DeviceSettings extends PreferenceFragment implements
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.xiaomiparts_preferences, rootKey);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.getContext());
 
         VibrationSeekBarPreference vibrationStrength = (VibrationSeekBarPreference) findPreference(PREF_VIBRATION_STRENGTH);
         vibrationStrength.setEnabled(FileUtils.fileWritable(VIBRATION_STRENGTH_PATH));
@@ -127,10 +122,6 @@ public class DeviceSettings extends PreferenceFragment implements
         backlightDimmer.setEnabled(BacklightDimmer.isSupported());
         backlightDimmer.setChecked(BacklightDimmer.isCurrentlyEnabled(this.getContext()));
         backlightDimmer.setOnPreferenceChangeListener(new BacklightDimmer(getContext()));
-
-        SwitchPreference fpsInfo = (SwitchPreference) findPreference(PREF_KEY_FPS_INFO);
-        fpsInfo.setChecked(prefs.getBoolean(PREF_KEY_FPS_INFO, false));
-        fpsInfo.setOnPreferenceChangeListener(this);
 
          // SELinux
         Preference selinuxCategory = findPreference(SELINUX_CATEGORY);
@@ -223,16 +214,6 @@ public class DeviceSettings extends PreferenceFragment implements
                 } else if (preference == mSelinuxPersistence) {
                   setSelinuxEnabled(mSelinuxMode.isChecked(), (Boolean) value);
                   return true;
-                }
-                break;
-
-            case PREF_KEY_FPS_INFO:
-                boolean enabled = (Boolean) value;
-                Intent fpsinfo = new Intent(this.getContext(), FPSInfoService.class);
-                if (enabled) {
-                    this.getContext().startService(fpsinfo);
-                } else {
-                    this.getContext().stopService(fpsinfo);
                 }
                 break;
 

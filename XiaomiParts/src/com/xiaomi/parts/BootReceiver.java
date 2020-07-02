@@ -4,8 +4,6 @@ import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import androidx.preference.PreferenceManager;
 import android.provider.Settings;
 import android.content.SharedPreferences;
 import android.os.SELinux;
@@ -93,8 +91,6 @@ mContext = context;
         }
     }
 
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-
         if (Settings.Secure.getInt(context.getContentResolver(), PREF_ENABLED, 0) == 1) {
             FileUtils.setValue(KCAL_ENABLE, Settings.Secure.getInt(context.getContentResolver(),
                     PREF_ENABLED, 0));
@@ -147,9 +143,6 @@ mContext = context;
 	//Ambient
         context.startService(new Intent(context, SensorsDozeService.class));
 
-        boolean enabled = sharedPrefs.getBoolean(DeviceSettings.PREF_KEY_FPS_INFO, false);
-        if (enabled) {
-            context.startService(new Intent(context, FPSInfoService.class));
         }
     }
 
