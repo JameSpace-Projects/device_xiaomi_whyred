@@ -28,6 +28,7 @@ $(call inherit-product, $(LOCAL_PATH)/device.mk)
 # Inherit GApps Stuffs
 TARGET_GAPPS_ARCH := arm64
 IS_PHONE := true
+TARGET_BOOT_ANIMATION_RES := 1080
 
 # Inherit some stuffs
 CUSTOM_BUILD_TYPE := OFFICIAL

@@ -144,7 +144,6 @@ mContext = context;
         context.startService(new Intent(context, SensorsDozeService.class));
 
         }
-    }
 
 private void showToast(String toastString, Context context) {
     Toast.makeText(context, toastString, Toast.LENGTH_SHORT)
