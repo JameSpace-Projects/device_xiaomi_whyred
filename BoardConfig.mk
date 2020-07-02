@@ -49,6 +49,8 @@ BOARD_VENDORIMAGE_PARTITION_SIZE := 2147483648
 # IPA
 USE_DEVICE_SPECIFIC_DATA_IPA_CFG_MGR := true
 
+# Fix Fuplicate while building
+BUILD_BROKEN_DUP_RULES := true
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
