@@ -32,8 +32,7 @@ TARGET_BOOT_ANIMATION_RES := 1080
 
 # Inherit some stuffs
 CUSTOM_BUILD_TYPE := OFFICIAL
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.fusion.maintainer=James Phạm
+TARGET_PIXEL_LWP := true
 TARGET_FACE_UNLOCK_SUPPORTED := true
 
 PRODUCT_BRAND := Xiaomi
